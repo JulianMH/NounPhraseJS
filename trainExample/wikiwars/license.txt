@@ -1,0 +1,18 @@
+This is a converted to plain text version of the WikiWars Dataset from:
+http://dl.acm.org/citation.cfm?id=1870747
+
+From the license description of the dataset:
+
+All the documents in the corpus are sources from English Wikipedia. As a 
+consequence, the corpus is released under the Creative Commons 
+Attribution-ShareAlike 3.0 License - see the licence at
+http://en.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-
+ShareAlike_3.0_Unported_License.
+
+See also the Terms of Use at http://wikimediafoundation.org/wiki/Terms_of_Use.
+
+It is important to note that each time 'you distribute or publicly perform the 
+work or a collection, the licensor offers to the recipient a license to the 
+work on the same terms and conditions as the license granted to you under this 
+license.'
+
