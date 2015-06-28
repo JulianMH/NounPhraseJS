@@ -2,16 +2,16 @@
 
 // Configuration of which dataset, which architecture and hyper parameters to use
 var USE_TIME_DATASET = true;
-var USE_SENTENCE_NETWORK = false;
-var TRAIN_ITERATION_COUNT = 100000;
+var USE_SENTENCE_NETWORK = true;
+var TRAIN_ITERATION_COUNT = 1000000;
 
 var OPTIONS = {
-    hidden_unit_count: 30,
+    hidden_unit_count: 100,
     filter_count: 30,
     convolution_radius: 2,
     word_window_radius: 2,
     max_sentence_width: 60,
-    lookup_table_learn_rate : 0.1,
+    lookup_table_learn_rate : 0.05,
     trainer_learn_rate: 0.001,
     trainer_l2_decay: 0.0001,
     trainer_momentum: USE_SENTENCE_NETWORK ? 0.5 : 0.9,
