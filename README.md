@@ -29,7 +29,18 @@ To use the library just copy these 4 files and load all except the last one with
 
 ## Load a TextCorpus
 
-TODO
+To train a network yourself, you need to load a text corpus.
+```javascript
+var dictionary = new Dictionary();
+
+nounphrasejs.readTextFile("/trainExample/wikiWars/train.txt", function(text) {
+  var corpus = nounphrasejs.parseTextCorpus(text, dictionary, true);
+  // TODO: Do stuff with the text corpus here.
+};
+```
+The last parameter indicates if new words from the text corpus should be added to the dictionary. You want this to be true for train data and false for test data.
+
+The dataset is expected to be in a similar format to http://www.cnts.ua.ac.be/conll2000/chunking/ , all tags that do not include noun phrase information are simply ignored.
 
 ## Create a NetworkConfiguration object
 
@@ -38,12 +49,13 @@ If you want to train a network from scratch, call either getWordWindowConfigurat
 var options = {};
 var configuration = getWordWindowConfiguration(options, dictionary)
 ```
-For a list of possible options, check TODO.
+You do not need to pass any options, the configuration will just use reasonable default values for any missing parameter. For a list of possible parameters, check TODO.
 
 If you want to load a pretrained network from JSON, just pass the loaded json as a string to the same function. Make sure to use either getWordWindowConfiguration or getSentenceConfiguration depending on the type of the saved network.
 ```javascript
-nounphrasejs.readTextFile("/jsonNets/wordWindowNounPhrase", function(json) {
+nounphrasejs.readTextFile("/jsonNets/wordWindowNounPhrase.txt", function(json) {
   var configuration = getWordWindowConfiguration(json);
+  // TODO: Do stuff with the configuration here.
 };
 ```
 You can grab pretrained network JSON files from the "jsonNets" folder of this repository.
