@@ -1,9 +1,6 @@
 # Stuff to never commit for licensing issues.
 trainExample/conll2000/train.txt
 trainExample/conll2000/test.txt
-jsonNets
-
-
 
 
 # MacOS
