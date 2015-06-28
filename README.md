@@ -18,7 +18,7 @@ Now just host all those files on a server and navigate to the root folder in you
 # Getting Started
 You will need require.js to use the project: http://requirejs.org/
 
-To use the library just copy the 4 files and load all except the last one with require.js: 
+To use the library just copy these 4 files and load all except the last one with require.js: 
 - nounphrasejs.js
 - getSentenceConfiguration.js
 - getWordWindowConfiguration.js
