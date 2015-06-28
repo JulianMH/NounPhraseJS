@@ -18,5 +18,11 @@ Now just host all those files on a server and navigate to the root folder in you
 # Getting Started
 You will need require.js to use the project: http://requirejs.org/
 
-To use the library just copy the 4 files "nounphrasejs.js", "getSentenceConfiguration.js",  "getWordWindowConfiguration.js" and "convnet-min.js" to your project. Now load "nounphrase", "getSentenceConfiguration" and "getWordWindowConfiguration". "getSentenceConfiguration" and "getWordWindowConfiguration" are optional and you will most likely only need one of them for your project.
+To use the library just copy the 4 files and load all except the last one with require.js: 
+- nounphrasejs.js
+- getSentenceConfiguration.js
+- getWordWindowConfiguration.js
+- convnet-min.js
+
+"getSentenceConfiguration" and "getWordWindowConfiguration" are optional and you will most likely only need one of them for your project.
 
