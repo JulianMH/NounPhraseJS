@@ -1,5 +1,17 @@
 # NounPhraseJS.js
 
+## readTextFile
+
+A helper function to load a text file.
+
+```javascript
+var filename = "/trainExample/wikiWars/train.txt";
+nounphrasejs.readTextFile(filename, function(text) {
+  // TODO: Do stuff with the loaded text here.
+};
+```
+- filename is the path and name of the text file to load.
+
 ## Dictionary
 
 To create a new empty dictionary use the Dictionary function.
@@ -19,8 +31,29 @@ It is also possible to create a Dictionary object using a given list of words.
 var words = ["Apple", "Banana", "Cherry"];
 var dictionaryWithWords = new nounphrasejs.Dictionary(wordFeatureCount, rareWordMaxCount,);
 ```
-
 ## TextCorpus
+
+To load a text dataset given in the ConLL2000 format, use the parseTextCorpus function.
+The format of the ConLL2000 dataset is described here:
+http://www.cnts.ua.ac.be/conll2000/chunking/
+
+```javascript
+var allowModifyDictionary = false;
+
+var corpus = nounphrasejs.parseTextCorpus(text, dictionary, allowModifyDictionary);
+```
+- allowModifyDictionary indicates if new words from the text corpus should be added to the dictionary. This can be true for train data and should be false for test data. If a dictionary of words to use is provided, the parameter should be false in both cases.
+
+Alternatively, you can parse your own dataset files and create a TextCorpus by using the TextCorpus function:
+```javascript
+var sentences = [[word1, word2, word3], [word4, word5]];
+var wordCount = 5;
+
+var corpusCustom = new nounphrasejs.TextCorpus(sentences, dictionary, wordCount);
+```
+- sentences is a list of all sentences. Each sentences is a list of word objects. See Word below on how to create a word object.
+- word count is just a the count of all Word objects in sentences.
+
 ### Word
 
 Word is an object to represent a single word in a TextCorpus. It can be created using the Word function:
@@ -41,8 +74,8 @@ var word = new nounphrasejs.Word(index, actualWord, isCapitalised, nounPhrase);
         
 ## NetworkConfiguration
 
-TODO
-NetworkConfiguration: NetworkConfiguration,
-            TextCorpus: TextCorpus,
-            readTextFile: readTextFile,
-            parseTextCorpus: parseTextCorpus,
+TODO train
+TODO classify
+TODO test
+
+TODO getSentenceConfiguration getWordWindowConfiguration

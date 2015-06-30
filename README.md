@@ -60,7 +60,7 @@ nounphrasejs.readTextFile("/trainExample/wikiWars/train.txt", function(text) {
   // TODO: Do stuff with the text corpus here.
 };
 ```
-The last parameter indicates if new words from the text corpus should be added to the dictionary. You want this to be true for train data and false for test data. If you provide a dictionary of words to use, the parameter should be false in both cases.
+The last parameter of parseTextCorpus indicates if new words from the text corpus should be added to the dictionary. You want this to be true for train data and false for test data. If you provide a dictionary of words to use, the parameter should be false in both cases.
 
 The dataset is expected to be in a similar format to http://www.cnts.ua.ac.be/conll2000/chunking/, all tags that do not include noun phrase information are simply ignored.
 
@@ -71,7 +71,7 @@ To do the actual training and testing, a NetworkConfiguration object is needed. 
 var options = {};
 var configuration = getWordWindowConfiguration(options, dictionary)
 ```
-You do not need to pass any options, the configuration will just use reasonable default values for any missing parameter. For a list of possible parameters, check the API document.
+You do not need to pass any options, the configuration will just use reasonable default values for any missing parameter. For a list of possible parameters, check the API documentation.
 
 ### Training and Testing
 
@@ -96,7 +96,7 @@ var correctLabels = configuration.test(testCorpus, function(index, correctLabels
     + predictedLabel +" which is " + (predictedLabel == actualLabel) + ".");
 });
 ```
-Check TODO for more details on these functions.
+Check the API documentation for more details on these functions.
  
 # Network Architectures
 
