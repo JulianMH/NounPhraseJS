@@ -27,7 +27,7 @@ To use the library just copy these 4 files and load all except the last one with
 
 "getWordWindowConfiguration" and "getSentenceConfiguration" are optional and you will most likely only need one of them for your project. Check Network Architectures for more information.
 
-## Just classify Text
+## Classifying unlabeled Text
 
 To just classify a given sentence, load a pretrained network from JSON.  
 ```javascript
@@ -37,7 +37,7 @@ nounphrasejs.readTextFile("/jsonNets/wordWindowNounPhrase.txt", function(json) {
   // TODO: Do stuff with the configuration here.
 };
 ```
-Make sure to use either getWordWindowConfiguration or getSentenceConfiguration depending on the type of the saved network. You can grab pretrained network JSON files from the "jsonNets" folder of this repository. Their filename indicates if they are a word window configuration or a sentence configuration.
+Make sure to use either getWordWindowConfiguration or getSentenceConfiguration depending on the type of the saved network. You can use the pretrained network JSON files from the "jsonNets" folder of this repository. Their filename indicates if they are a word window configuration or a sentence configuration.
 
 The actual classification can be done by:
 ```javascript
