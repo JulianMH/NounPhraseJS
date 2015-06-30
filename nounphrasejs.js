@@ -22,7 +22,6 @@ define(['convnet-min'],
             rawFile.send(null);
         };
         
-        
         function Word(index, actualWord, isCapitalised, nounPhrase) {
             this.index = index;
             this.actualWord = actualWord;
@@ -34,18 +33,28 @@ define(['convnet-min'],
             return "Word: " + this.index + ", isCapitalised: " + this.isCapitalised + ", nounPhrase: " + this.nounPhrase;
         };
         
-        function Dictionary(wordFeatureCount, rareWordMaxCount) {
+        function Dictionary(wordFeatureCount, rareWordMaxCount, words) {
             this.wordFeatureCount = (typeof wordFeatureCount === 'undefined') ? 50 : wordFeatureCount;
             this.rareWordMaxCount = (typeof rareWordMaxCount === 'undefined') ? 1 : rareWordMaxCount;
         
             this.wordToIndices = new Object();
             this.wordIndicesToVols = new Array();
             this.wordCounts = new Array();
-            this.paddingVol = new convnetjs.Vol(this.wordFeatureCount, 1, 1);
-        
+            
             this.rareWordIndex = 0;
             this.rareVol = new convnetjs.Vol(this.wordFeatureCount, 1, 1);
+            this.paddingVol = new convnetjs.Vol(this.wordFeatureCount, 1, 1);
             this.wordIndicesToVols[this.rareWordIndex] = this.rareVol;
+            
+            var thisDictionary = this;
+            if(typeof words !== 'undefined')
+                words.forEach(function (word, wordIndex) {
+                    var index = wordIndex + 1;
+                    var dictionaryWord = WORD_PREFIX + word.toLowerCase();
+                    thisDictionary.wordToIndices[dictionaryWord] = index;
+                    thisDictionary.wordIndicesToVols[index] = new convnetjs.Vol(thisDictionary.wordFeatureCount, 1, 1);
+                    thisDictionary.wordCounts[index] = 0;
+                });
         }
         
         function reviveDictionary(jsonObject) {
@@ -70,7 +79,7 @@ define(['convnet-min'],
         
             var sentences = new Array();
             var currentSentence = new Array();
-            var currentNewWordIndex = dictionary.rareWordIndex + 1;
+            var currentNewWordIndex = dictionary.wordIndicesToVols.length;
             var wordCount = 0;
         
             lines.forEach(function (line, i, a) {
@@ -196,7 +205,7 @@ define(['convnet-min'],
                     if (!(typeof progressFunction === 'undefined'))
                     {
                         var newTestStartTime = new Date().getTime();
-                        progressFunction(totalCount, correctLabels, newTestStartTime - currentTestStartTime);
+                        progressFunction(totalCount, correctLabels, guess, word.nounPhrase, newTestStartTime - currentTestStartTime);
                         currentTestStartTime = newTestStartTime;
                     }
                 });
@@ -259,6 +268,7 @@ define(['convnet-min'],
             NOUN_PHRASE_BEGIN: NOUN_PHRASE_BEGIN,
             NOUN_PHRASE_INSIDE: NOUN_PHRASE_INSIDE,
             NOUN_PHRASE_NONE: NOUN_PHRASE_NONE,
+            WORD_PREFIX: WORD_PREFIX,
         };
     }
 );

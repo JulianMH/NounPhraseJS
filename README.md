@@ -49,7 +49,7 @@ If you want to train a network from scratch, call either getWordWindowConfigurat
 var options = {};
 var configuration = getWordWindowConfiguration(options, dictionary)
 ```
-You do not need to pass any options, the configuration will just use reasonable default values for any missing parameter. For a list of possible parameters, check TODO.
+You do not need to pass any options, the configuration will just use reasonable default values for any missing parameter. For a list of possible parameters, check the API document.
 
 If you want to load a pretrained network from JSON, just pass the loaded json as a string to the same function. Make sure to use either getWordWindowConfiguration or getSentenceConfiguration depending on the type of the saved network.
 ```javascript

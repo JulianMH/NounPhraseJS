@@ -55,7 +55,7 @@ require(["getWordWindowConfiguration", "getSentenceConfiguration", "nounphrasejs
         };
         
         var testTimePerItemSum = 0;
-        function testProgressFunction(i, correctLabels, testTime) {
+        function testProgressFunction(i, correctLabels, predictedLabel, actualLabel, testTime) {
             testTimePerItemSum += testTime;
             
             if (i % 100 === 0) {
