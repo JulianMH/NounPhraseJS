@@ -39,6 +39,14 @@ nounphrasejs.readTextFile("/jsonNets/wordWindowNounPhrase.txt", function(json) {
 ```
 Make sure to use either getWordWindowConfiguration or getSentenceConfiguration depending on the type of the saved network. You can grab pretrained network JSON files from the "jsonNets" folder of this repository. Their filename indicates if they are a word window configuration or a sentence configuration.
 
+The actual classification can be done by:
+```javascript
+configuration.classifySentence(["The", "blue", "cat", "sat", "on", "a", "mat", "."], 
+  function(word, wordIndex, result) {
+    alert("Word " + word + " classified as " + result + ".");
+});
+```
+
 ## Training a network
 
 ### Load a dataset
@@ -71,11 +79,25 @@ To train the network by taking 10000 random samples from your training data, cal
 ```javascript
 configuration.train(trainCorpus, 100000);
 ```
-If you want to be able to output training statistics or provide a progress bar, pass a proress function.
- function(index, stats, trainTime) {
-  
-}
-
+If you want to be able to output training statistics or provide a progress bar, pass a progress callback function.
+```javascript
+configuration.train(trainCorpus, 100000, function(index, stats, trainTime) {
+  alert("Trained with " +  index + " of 10000 samples.");
+});
+```
+Testing works similar.
+```javascript
+var correctLabels = configuration.test(testCorpus);
+```
+You can also pass a progress callback function.
+```javascript
+var correctLabels = configuration.test(testCorpus, function(index, correctLabels, predictedLabel, actualLabel, testTime) {
+  alert("Text example number " + index + " was predicted to be " 
+    + predictedLabel +" which is " + (predictedLabel == actualLabel) + ".");
+});
+```
+Check TODO for more details on these functions.
+ 
 # Network Architectures
 
 TODO
