@@ -1,9 +1,9 @@
 "use strict";
 
 // Configuration of which dataset, which architecture and hyper parameters to use
-var USE_TIME_DATASET = true;
-var USE_SENTENCE_NETWORK = true;
-var TRAIN_ITERATION_COUNT = 1000000;
+var USE_TIME_DATASET = false;
+var USE_SENTENCE_NETWORK = false;
+var TRAIN_ITERATION_COUNT = 50000;
 
 var OPTIONS = {
     hidden_unit_count: 100,
@@ -24,7 +24,7 @@ var DICTIONARY_WORD_FEATURE_COUNT = 50;
 var window = new Object();
 
 importScripts("../libraries/require.js");
-require.config({baseUrl : '/'});
+require.config({baseUrl : '../'});
 
 require(["getWordWindowConfiguration", "getSentenceConfiguration", "nounphrasejs", "libraries/cnnutil"],
     function(getWordWindowConfiguration, getSentenceConfiguration, nounphrasejs, _) {

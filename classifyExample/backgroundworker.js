@@ -7,7 +7,7 @@ var USE_SENTENCE_NETWORK = false;
 var window = new Object();
 
 importScripts("../libraries/require.js");
-require.config({baseUrl : '/'});
+require.config({baseUrl : '../'});
 
 require(["getWordWindowConfiguration", "getSentenceConfiguration", "nounphrasejs",  "libraries/cnnutil"],
  	 function(getWordWindowConfiguration, getSentenceConfiguration, nounphrasejs, _) {
