@@ -1,4 +1,4 @@
-# NounPhraseJS.js
+# NounPhraseJS API Documentation
 
 ## readTextFile
 
@@ -51,8 +51,8 @@ var wordCount = 5;
 
 var corpusCustom = new nounphrasejs.TextCorpus(sentences, dictionary, wordCount);
 ```
-- sentences is a list of all sentences. Each sentences is a list of word objects. See Word below on how to create a word object.
-- word count is just a the count of all Word objects in sentences.
+- sentences is a list of all sentences. Each sentences is a list of Word objects. See Word below on how to create a Word object.
+- wordCount is just a the count of all Word objects in sentences.
 
 ### Word
 
@@ -72,7 +72,38 @@ var word = new nounphrasejs.Word(index, actualWord, isCapitalised, nounPhrase);
 - isCapitalised is wether the original word starts with a capital letter.
 - nounPhrase is the class of the word for the classification task.
         
-## NetworkConfiguration
+## NetworkConfigurations
+
+### Options
+
+Both configurations share the following parameters:
+- hidden_unit_count Amount of units in each hidden layer.
+- output_classes Amount of classes for the classification of each word. For noun phrase detection 3 classes are used. This value can be changed to work for other natural language processing tasks.
+- lookup_table_learn_rate Determines the rate at which the word feature vectors are trained.
+
+The following parameters configure the stochastic gradient decent trainer that is used. See http://cs.stanford.edu/people/karpathy/convnetjs/docs.html for documentation on the SGD trainer parameters:
+- trainer_learn_rate
+- trainer_l1_decay
+- trainer_l2_decay
+- trainer_momentum
+- trainer_batch_size
+
+### getWordWindowConfiguration
+
+This is a network inspired by the word window approach network from the paper:
+"A Unified Architecture for Natural Language Processing: Deep Neural Networks with Multitask Learning" by R. Colobert and J.Weston."
+
+It has one additional parameter:
+
+- word_window_radius
+
+TODO Illustration of the network
+
+### getSentenceConfiguration
+
+- filter_count
+- convolution_radius
+- max_sentence_width
 
 TODO train
 TODO classify

@@ -8,6 +8,7 @@ define(["nounphrasejs"], function(nounphrasejs) {
         lookup_table_learn_rate: 0.1,
         output_classes: 3,
         trainer_learn_rate: 0.001,
+        trainer_l1_decay: 0,
         trainer_l2_decay: 0.0001,
         trainer_momentum: 0.9,
         trainer_batch_size: 10
@@ -43,6 +44,7 @@ define(["nounphrasejs"], function(nounphrasejs) {
         var trainer = new convnetjs.Trainer(network, {
             method: 'sgd', 
             learning_rate: options.trainer_learn_rate,
+            l1_decay: options.trainer_l1_decay,
             l2_decay: options.trainer_l2_decay, 
             momentum:  options.trainer_momentum, 
             batch_size:  options.trainer_batch_size,

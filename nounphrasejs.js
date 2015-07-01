@@ -191,7 +191,7 @@ define(['convnet-min'],
             
                     var guess = 0;
                     var currentMaximum = result.w[0];
-                    for (var index = 1; index < 3; ++index) {
+                    for (var index = 1; index < result.w.length; ++index) {
                         if (result.w[index] > currentMaximum) {
                             guess = index;
                             currentMaximum = result.w[index];
