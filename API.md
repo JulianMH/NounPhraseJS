@@ -74,6 +74,31 @@ var word = new nounphrasejs.Word(index, actualWord, isCapitalised, nounPhrase);
         
 ## NetworkConfigurations
 
+### Loading
+Both configurations can be created by calling their function with an options object and a Dictionary Object.
+```javascript
+var options = { hidden_unit_count: 30, lookup_table_learn_rate: 10 };
+
+var wordWindowConfiguration = getWordWindowConfiguration(options, dictionary);
+var sentenceConfiguration = getSentenceConfiguration(options, dictionary);
+```
+All available options are listed in the Options section and section for the respective functions. If an option is not set, the configuration will just use a reasonable default value.
+
+To load configurations from JSON, call the same functions using a JSON string as the parameter:
+```javascript
+nounphrasejs.readTextFile("/jsonNets/wordWindowNounPhrase.txt", function(wordWindowJSON) {
+  var wordWindowConfiguration = getWordWindowConfiguration(wordWindowJSON);
+  
+  // TODO: Do stuff with the configuration here.
+});
+
+nounphrasejs.readTextFile("/jsonNets/sentenceNounPhrase.txt", function(sentenceJSON) {
+  var sentenceConfiguration = getSentenceConfiguration(sentenceJSON);
+  
+  // TODO: Do stuff with the configuration here.
+});
+```
+
 ### Options
 
 Both configurations share the following parameters:
@@ -95,18 +120,21 @@ This is a network inspired by the word window approach network from the paper:
 
 It has one additional parameter:
 
-- word_window_radius
+- word_window_radius determines how many words before and after each word are fed into the network. A value of 2 means that a total of 2 + 1 + 2 = 5 words are the input of the network.
 
-TODO Illustration of the network
+![Image of word window network](http://i.imgur.com/uigYTT6.png)
 
 ### getSentenceConfiguration
 
-- filter_count
+This is a network inspired by the word sentence approach network from the paper:
+"A Unified Architecture for Natural Language Processing: Deep Neural Networks with Multitask Learning" by R. Colobert and J.Weston."
+
+- filter_count the amount of filters in the convolution layer
 - convolution_radius
 - max_sentence_width
 
-TODO train
-TODO classify
-TODO test
+![Image of word window network](http://i.imgur.com/R7yaK8P.png)
 
-TODO getSentenceConfiguration getWordWindowConfiguration
+### Training
+### Testing
+### Classifying

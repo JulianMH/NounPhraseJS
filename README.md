@@ -69,7 +69,7 @@ The dataset is expected to be in a similar format to http://www.cnts.ua.ac.be/co
 To do the actual training and testing, a NetworkConfiguration object is needed. Call either getWordWindowConfiguration or getSentenceConfiguration depending on which network architecture you prefer.
 ```javascript
 var options = {};
-var configuration = getWordWindowConfiguration(options, dictionary)
+var configuration = getWordWindowConfiguration(options, dictionary);
 ```
 You do not need to pass any options, the configuration will just use reasonable default values for any missing parameter. For a list of possible parameters, check the API documentation.
 
