@@ -116,7 +116,7 @@ The following parameters configure the stochastic gradient decent trainer that i
 ### getWordWindowConfiguration
 
 This is a network inspired by the word window approach network from the paper:
-"A Unified Architecture for Natural Language Processing: Deep Neural Networks with Multitask Learning" by R. Colobert and J.Weston."
+"A Unified Architecture for Natural Language Processing: Deep Neural Networks with Multitask Learning" by R. Colobert and J.Weston.
 
 It has one additional parameter:
 
@@ -127,7 +127,7 @@ It has one additional parameter:
 ### getSentenceConfiguration
 
 This is a network inspired by the word sentence approach network from the paper:
-"A Unified Architecture for Natural Language Processing: Deep Neural Networks with Multitask Learning" by R. Colobert and J.Weston."
+"A Unified Architecture for Natural Language Processing: Deep Neural Networks with Multitask Learning" by R. Colobert and J.Weston.
 
 - filter_count the amount of filters in the convolution layer
 - convolution_radius determines how many words before and after each word are included in each convolution. A value of 2 means that a total of 2 (words to the left) + 1 (actual word) + 2 (words to the right) = 5 words are the input of the network.

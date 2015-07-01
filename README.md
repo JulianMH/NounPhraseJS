@@ -1,14 +1,10 @@
 # NounPhraseJS
 Noun phrase detection in JavaScript using neural nets with convnetjs. Part of my bachelor thesis.
 
-Still in development, better documentation coming soon.
+It uses deep neural networks inspired by the paper:
+"A Unified Architecture for Natural Language Processing: Deep Neural Networks with Multitask Learning" by R. Colobert and J.Weston.
 
-# License
-Check the license.txt file for detailed license information.
-
-In general, most of the files are under MIT License.
-The WikiWars dataset is under Wikipedias Creative Commons License.
-The CONLL2000 dataset has no compatible license and thus is not included in this repository.
+Since this neural networks in this paper are suitable for other NLP tasks, this library should be helpful for other NLP tasks as well.
 
 # Getting Started
 ## Running the example code
@@ -101,3 +97,10 @@ var correctLabels = configuration.test(testCorpus, function(index, correctLabels
 ```
 Check the API documentation for more details on these callback functions.
 https://github.com/JulianMH/NounPhraseJS/blob/master/API.md
+
+# License
+Check the license.txt file for detailed license information.
+
+In general, most of the files are under MIT License.
+The WikiWars dataset is under Wikipedias Creative Commons License.
+The CONLL2000 dataset has no compatible license and thus is not included in this repository.
