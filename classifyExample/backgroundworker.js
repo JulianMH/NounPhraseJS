@@ -60,7 +60,15 @@ require(["getWordWindowConfiguration", "getSentenceConfiguration", "nounphrasejs
                             currentWord = "";
                             currentSeperator = "";
                         }
-                        currentSeperator += c;
+                        if(wordSeperator.indexOf(c) === -1)
+                        {
+                            currentSentenceWords.push(c);
+                            currentSentenceSeperators.push(currentSeperator);
+                            currentWord = "";
+                            currentSeperator = "";
+                        }
+                        else
+                            currentSeperator += c;
                         if(sentenceSeperator.indexOf(c) > -1) {
                             processSentence(currentSentenceWords, currentSentenceSeperators);
                             currentSentenceWords = [];
@@ -81,9 +89,9 @@ require(["getWordWindowConfiguration", "getSentenceConfiguration", "nounphrasejs
                 var totalClassifyTime = new Date().getTime() - classifyStartTime;
                     
                 postMessage(["stats", 
-                    ["Word Count", wordCount],
+                    ["Token Count", wordCount],
                     ["Total Time", totalClassifyTime + " ms"], 
-                    ["Per Word Time", totalClassifyTime / wordCount + " ms"]]);
+                    ["Per Token Time", totalClassifyTime / wordCount + " ms"]]);
                 
     			postMessage(["finished"]);
     		}, false);
