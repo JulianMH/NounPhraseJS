@@ -37,6 +37,7 @@ require(["getWordWindowConfiguration", "getSentenceConfiguration", "nounphrasejs
                     });
                 }
                 
+                // From here all remaining code is to tokenize the input text.
                 var currentSentenceWords = [];
                 var currentSentenceSeperators = [];
                 

@@ -2,12 +2,15 @@
 
 define(['convnet-min'],
     function(){
-        // File I/O Constants
+        // Constants for parsing the noun phrase labels
         var NOUN_PHRASE_BEGIN = 1;
         var NOUN_PHRASE_INSIDE = 2;
         var NOUN_PHRASE_NONE = 0;
+        
+        // Every word in the dictionary is prefixed with a few letters, to make sure there are no collisions between property names.
         var WORD_PREFIX = "abc";
         
+        // Helper function to get the contents of a text file.
         function readTextFile(file, doneReading) {
             var rawFile = new XMLHttpRequest();
             rawFile.open("GET", file, false);
@@ -57,6 +60,7 @@ define(['convnet-min'],
                 });
         }
         
+        // Helper function to restore dictionary functionality after parsing it from JSON.
         function reviveDictionary(jsonObject) {
             jsonObject.paddingVol = reviveVol(jsonObject.paddingVol);
             jsonObject.rareVol = reviveVol(jsonObject.rareVol);
@@ -67,6 +71,7 @@ define(['convnet-min'],
             return jsonObject;
         }
         
+        // Helper function to restore convnetjs.Vol functionality after parsing it from JSON.
         function reviveVol(jsonObject) {
             var vol = new convnetjs.Vol(jsonObject.sx, jsonObject.sy, jsonObject.depth);
             vol.w = jsonObject.w;
@@ -74,6 +79,7 @@ define(['convnet-min'],
             return vol;
         }
         
+        // Reads a TextCorpus from a ConLL2000 formatted file.
         function parseTextCorpus(text, dictionary, allowModifyDictionary) {
             var lines = text.split("\n");
         
@@ -145,7 +151,6 @@ define(['convnet-min'],
             this.wordCount = wordCount;
         };
         
-        
         function NetworkConfiguration(network, trainer, getFeatureVector, trainFeatureVectorFromTrainingSample, dictionary, options) {
             this.network = network;
             this.trainer = trainer;
@@ -155,6 +160,7 @@ define(['convnet-min'],
             this.dictionary = dictionary;
         };
         
+        // Train the neural network using the given dataset.
         NetworkConfiguration.prototype.train = function(trainCorpus, iterations, progressFunction) {
             var currentTrainStartTime = new Date().getTime();
             for (var i = 0; i < iterations; ++i) {
@@ -176,6 +182,7 @@ define(['convnet-min'],
             }
         };
         
+        // Test the neural network using the given dataset.
         NetworkConfiguration.prototype.test = function(testCorpus, progressFunction) {
             var totalCount = 0;
             var correctLabels = 0;
@@ -214,6 +221,7 @@ define(['convnet-min'],
             return correctLabels;
         };
         
+        // Classify the words of a given sentence with the neural networks.
         NetworkConfiguration.prototype.classifySentence = function(sentenceWordList, outputForWord) {
             
             var words = new Array();
@@ -253,6 +261,7 @@ define(['convnet-min'],
             });
         };
         
+        // Convert a whole NetworkConfiguration to JSON.
         NetworkConfiguration.prototype.toJSON = function() {
             return JSON.stringify({dictionary: this.dictionary, netJSON: this.network.toJSON(), options: this.options});
         };
