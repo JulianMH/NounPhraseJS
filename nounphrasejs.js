@@ -205,7 +205,7 @@ define(['convnet-min'],
                     if (!(typeof progressFunction === 'undefined'))
                     {
                         var newTestStartTime = new Date().getTime();
-                        progressFunction(totalCount, correctLabels, guess, word.nounPhrase, newTestStartTime - currentTestStartTime);
+                        progressFunction(totalCount, correctLabels, guess, word.nounPhrase, result.w, newTestStartTime - currentTestStartTime);
                         currentTestStartTime = newTestStartTime;
                     }
                 });
@@ -249,7 +249,7 @@ define(['convnet-min'],
                     }
                 };
                 
-                outputForWord(sentenceWordList[wordIndex], wordIndex, guess);
+                outputForWord(sentenceWordList[wordIndex], wordIndex, guess, result.w);
             });
         };
         

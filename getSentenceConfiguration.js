@@ -7,7 +7,7 @@ define(["nounphrasejs"], function(nounphrasejs) {
         filter_count: 30,
         convolution_radius: 2,
         max_sentence_width: 60,
-        output_classes: 3,
+        output_labels: 3,
         lookup_table_learn_rate: 0.1,
         trainer_learn_rate: 0.001,
         trainer_l1_decay: 0,
@@ -43,7 +43,7 @@ define(["nounphrasejs"], function(nounphrasejs) {
                 //{ type: 'fc', num_neurons: options.hidden_unit_count },
                 //{ type: 'fc', num_neurons: options.hidden_unit_count, activation: 'tanh' },
                 //{ type: 'fc', num_neurons: options.hidden_unit_count }),
-                { type: 'softmax', num_classes: options.output_classes }]);
+                { type: 'softmax', num_classes: options.output_labels }]);
         }
         
         var trainer = new convnetjs.Trainer(network, {

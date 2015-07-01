@@ -32,7 +32,7 @@ require(["getWordWindowConfiguration", "getSentenceConfiguration", "nounphrasejs
                 
                 function processSentence(sentenceWords, sentenceSeperators) {
                     wordCount += sentenceWords.length;
-                    configuration.classifySentence(sentenceWords, function(word, wordIndex, result) {
+                    configuration.classifySentence(sentenceWords, function(word, wordIndex, result, percentages) {
                         postMessage(["word", [sentenceSeperators[wordIndex], sentenceWords[wordIndex], result]]);
                     });
                 }

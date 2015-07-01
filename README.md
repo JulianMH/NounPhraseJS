@@ -42,10 +42,12 @@ Make sure to use either getWordWindowConfiguration or getSentenceConfiguration d
 The actual classification can be done by:
 ```javascript
 configuration.classifySentence(["The", "blue", "cat", "sat", "on", "a", "mat", "."], 
-  function(word, wordIndex, result) {
+  function(word, wordIndex, result, percentages) {
     alert("Word " + word + " classified as " + result + ".");
 });
 ```
+Check the API documentation for more details on the callback functions.
+https://github.com/JulianMH/NounPhraseJS/blob/master/API.md
 
 ## Training a network
 
@@ -71,7 +73,8 @@ To do the actual training and testing, a NetworkConfiguration object is needed. 
 var options = {};
 var configuration = getWordWindowConfiguration(options, dictionary);
 ```
-You do not need to pass any options, the configuration will just use reasonable default values for any missing parameter. For a list of possible parameters, check the API documentation.
+You do not need to pass any options, the configuration will just use reasonable default values for any missing parameter. For a list of possible parameters, check the API documentation. 
+https://github.com/JulianMH/NounPhraseJS/blob/master/API.md
 
 ### Training and Testing
 
@@ -91,13 +94,10 @@ var correctLabels = configuration.test(testCorpus);
 ```
 You can also pass a progress callback function.
 ```javascript
-var correctLabels = configuration.test(testCorpus, function(index, correctLabels, predictedLabel, actualLabel, testTime) {
+var correctLabels = configuration.test(testCorpus, function(index, correctLabels, predictedLabel, actualLabel, percentages, testTime) {
   alert("Text example number " + index + " was predicted to be " 
     + predictedLabel +" which is " + (predictedLabel == actualLabel) + ".");
 });
 ```
-Check the API documentation for more details on these functions.
- 
-# Network Architectures
-
-TODO
+Check the API documentation for more details on these callback functions.
+https://github.com/JulianMH/NounPhraseJS/blob/master/API.md

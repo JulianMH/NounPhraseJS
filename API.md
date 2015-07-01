@@ -103,7 +103,7 @@ nounphrasejs.readTextFile("/jsonNets/sentenceNounPhrase.txt", function(sentenceJ
 
 Both configurations share the following parameters:
 - hidden_unit_count Amount of units in each hidden layer.
-- output_classes Amount of classes for the classification of each word. For noun phrase detection 3 classes are used. This value can be changed to work for other natural language processing tasks.
+- output_labels Amount of possible labels for the classification of each word. For noun phrase detection 3 different labels are used. This value can be changed to work for other natural language processing tasks.
 - lookup_table_learn_rate Determines the rate at which the word feature vectors are trained.
 
 The following parameters configure the stochastic gradient decent trainer that is used. See http://cs.stanford.edu/people/karpathy/convnetjs/docs.html for documentation on the SGD trainer parameters:
@@ -120,7 +120,7 @@ This is a network inspired by the word window approach network from the paper:
 
 It has one additional parameter:
 
-- word_window_radius determines how many words before and after each word are fed into the network. A value of 2 means that a total of 2 + 1 + 2 = 5 words are the input of the network.
+- word_window_radius determines how many words before and after each word are fed into the network. A value of 2 means that a total of 2 (words to the left) + 1 (actual word) + 2 (words to the right) = 5 words are the input of the network.
 
 ![Image of word window network](http://i.imgur.com/uigYTT6.png)
 
@@ -130,11 +130,67 @@ This is a network inspired by the word sentence approach network from the paper:
 "A Unified Architecture for Natural Language Processing: Deep Neural Networks with Multitask Learning" by R. Colobert and J.Weston."
 
 - filter_count the amount of filters in the convolution layer
-- convolution_radius
-- max_sentence_width
+- convolution_radius determines how many words before and after each word are included in each convolution. A value of 2 means that a total of 2 (words to the left) + 1 (actual word) + 2 (words to the right) = 5 words are the input of the network.
+- max_sentence_width determines the maximum word count a input sentence can have for the convolution network. Sentences with more words will be cut off. Make sure this value is high enough for your dataset that most sentences are covered.
 
 ![Image of word window network](http://i.imgur.com/R7yaK8P.png)
 
-### Training
-### Testing
-### Classifying
+### train function
+
+Trains the neural network with given dataset.
+```javascript
+var iterationCount = 100000;
+var progressFunction = function(index, stats, trainTime) {
+  alert("Trained with " +  index + " of 10000 samples.");
+}
+
+configuration.train(trainCorpus, iterationCount, progressFunction);
+```
+- trainCorpus is the dataset used for training.
+- iterationCount determines how many times a random word is chosen and used to train the network.
+- progressFunction is a callback function that is called after each word is trained.
+  - index is the iteration of the word that was trained.
+  - stats is the stats object returned by ConvNetJS after training. It contains statistics like the current training loss. http://cs.stanford.edu/people/karpathy/convnetjs/docs.html
+  - trainTime is the time this training iteration took in milliseconds.
+  
+The progressFunction is an optional argument.
+
+### test function
+
+Tests the neural network with given dataset and returns how many words were classified correctly.
+```javascript
+var progressFunction = function(index, correctLabels, predictedLabel, actualLabel, percentages, testTime) {
+  alert("Text example number " + index + " was predicted to be " 
+    + predictedLabel +" which is " + (predictedLabel == actualLabel) + ".");
+};
+
+var correctLabels = configuration.test(testCorpus, progressFunction);
+```
+- testCorpus is the dataset used for validation.
+- progressFunction is a callback function that is called after each word is trained.
+  - index is the number of the word that was trained.
+  - correctLabels is the amount of words that were predicted correctly so far.
+  - predictedLabel is the label the network predicted for the word.
+  - actualLabel is the label the word has in the dataset.
+  - percentages is a list of likelihoods the network calculated for the word for each possible label.
+  - trainTime is the time testing this word took in milliseconds.
+  
+The progressFunction is an optional argument.
+
+### classify function
+
+Classify a sentence and call a callbackfunction with the result for eaach word once its been classified.
+```javascript
+var sentence = ["The", "blue", "cat", "sat", "on", "a", "mat", "."];
+var callbackFunction = function(word, wordIndex, result, percentages) {
+    alert("Word " + word + " classified as " + result + ".");
+};
+
+configuration.classifySentence(sentence, callbackFunction);
+```
+- sentence is a list of individual words that form the sentence to classify.
+- callbackFunction is a callback function that is called once for each word to classify.
+  - word is the word that was classified as a string.
+  - wordIndex is the list index of the word that was classified.
+  - result is the label the network predicted for the word.
+  - percentages is a list of likelihoods the network calculated for the word for each possible label.
