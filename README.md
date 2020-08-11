@@ -8,7 +8,7 @@ Since this neural networks in this paper are suitable for other NLP tasks, this 
 
 # Getting Started
 ## Running the example code
-Grab all files from the repository. If you want to use noun phrase detection, download the train.txt and test.txt from http://www.cnts.ua.ac.be/conll2000/chunking/. Extract those files and put them in the folder trainExample/conll2000.
+Grab all files from the repository. If you want to use noun phrase detection, download the train.txt and test.txt from https://www.clips.uantwerpen.be/conll2000/chunking/. Extract those files and put them in the folder trainExample/conll2000.
 
 Now just host all those files on a server and navigate to the root folder in your browser. If you run Unix with python installed you can just use the server.sh to run a local server and find the example code under localhost:8000.
 
@@ -60,7 +60,7 @@ nounphrasejs.readTextFile("/trainExample/wikiWars/train.txt", function(text) {
 ```
 The last parameter of parseTextCorpus indicates if new words from the text corpus should be added to the dictionary. You want this to be true for train data and false for test data. If you provide a dictionary of words to use, the parameter should be false in both cases.
 
-The dataset is expected to be in a similar format to http://www.cnts.ua.ac.be/conll2000/chunking/, all tags that do not include noun phrase information are simply ignored.
+The dataset is expected to be in a similar format to https://www.clips.uantwerpen.be/conll2000/chunking/, all tags that do not include noun phrase information are simply ignored.
 
 ### Create a NetworkConfiguration object
 
